@@ -1,5 +1,6 @@
 package application.server;
 
+import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -23,14 +24,12 @@ public class Server {
 			System.out.println("Esperando por datagrama UDP na porta " + porta);
 			serverSocket.receive(receivePacket);
 			System.out.print("Datagrama UDP [" + numConn + "] recebido...");
-
-			String sentence = new String(receivePacket.getData());
-			System.out.println(sentence);
 			
-			InetAddress IPAddress = receivePacket.getAddress();
+			sendToOtherPlayer(receivePacket, sendData, serverSocket);
 
-			int port = receivePacket.getPort();
-
+			/*
+			
+			String sentence = new String(receivePacket.getData());
 			String capitalizedSentence = sentence.toUpperCase();
 
 			sendData = capitalizedSentence.getBytes();
@@ -42,7 +41,39 @@ public class Server {
 
 			serverSocket.send(sendPacket);
 			System.out.println("OK\n");
+			*/
 		}
+	}
+	
+	public static void sendToOtherPlayer(DatagramPacket receivedPacket,byte[] sendData, DatagramSocket serverSocket) {
+		
+		int port = receivedPacket.getPort();
+		System.out.println("Porta: " + port);
+		if(port == 62252) {
+			port = 62251;
+		}else {
+			port = 62252;
+		}
+		
+		String sentence = new String(receivedPacket.getData());
+		System.out.println(sentence);
+		
+		InetAddress IPAddress = receivedPacket.getAddress();
+		String capitalizedSentence = sentence.toUpperCase();
+
+		sendData = capitalizedSentence.getBytes();
+
+		DatagramPacket sendPacket = new DatagramPacket(sendData,
+				sendData.length, IPAddress, port);
+		
+		System.out.print("Enviando " + capitalizedSentence + "...");
+
+		try {
+			serverSocket.send(sendPacket);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("OK\n");
 	}
 	
 }

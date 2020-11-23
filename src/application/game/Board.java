@@ -3,7 +3,6 @@ package application.game;
 import java.util.ArrayList;
 import java.util.Random;
 
-import application.client.Client;
 
 public class Board {
 	
@@ -20,10 +19,6 @@ public class Board {
 		b.getSubamarinePositions();
 		b.getCruzadersPositions();
 		b.getAircraftCarrierPositions();
-		
-		for (Integer integer : b.list) {
-			System.out.println(integer);
-		}
 		for(int i = 0; i < 10; i++) {
 			for(int j = 0; j < 10; j++) {
 				Integer posicaoAtual = Integer.valueOf(String.valueOf(i) + String.valueOf(j));
