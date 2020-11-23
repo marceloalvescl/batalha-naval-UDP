@@ -5,3 +5,4 @@ Para tanto, pode-se utilizar uma IDE e executar via console ou executar no termi
 
 Exemplo:
 <img src=”https://github.com/marceloalvescl/batalha-naval-UDP/blob/main/readme-images/Em-Execucao.png”>
+![](https://github.com/marceloalvescl/batalha-naval-UDP/blob/main/readme-images/Em-Execucao.png)
