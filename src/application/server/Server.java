@@ -59,15 +59,14 @@ public class Server {
 		System.out.println(sentence);
 		
 		InetAddress IPAddress = receivedPacket.getAddress();
-		String capitalizedSentence = sentence.toUpperCase();
 
-		sendData = capitalizedSentence.getBytes();
+		sendData = sentence.getBytes();
 
 		DatagramPacket sendPacket = new DatagramPacket(sendData,
 				sendData.length, IPAddress, port);
 		
-		System.out.print("Enviando " + capitalizedSentence + "...");
-
+		System.out.print("Enviando " + sentence + "...");
+		
 		try {
 			serverSocket.send(sendPacket);
 		} catch (IOException e) {
